@@ -1,0 +1,73 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+            <div *ngIf="products.length == 0" style="margin: 0 auto; float: none; margin-bottom: 10px;">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">In store</h4>
+                    <p class="card-category"> This are products that are still in store</p>
+                </div>
+                <a class="btn btn-danger" routerLink="/add-product">Add Product</a>
+            </div>
+
+              <div class="card" *ngIf="products.length > 0">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">In store</h4>
+                      <p class="card-category"> This are products that are still in store</p>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      ID
+                                  </th>
+                                  <th>
+                                      Name
+                                  </th>
+                                  <th>
+                                      Price
+                                  </th>
+                                  <th>
+                                      Stock Quantity
+                                  </th>
+                                  <th>
+                                      Image
+                                  </th>
+                                  <th></th>
+                                  <th></th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let product of products">
+                                      <td>
+                                        1
+                                      </td>
+                                      <td>
+                                          {{ product.name }}
+                                      </td>
+                                      <td>
+                                          R {{ product.price }}
+                                      </td>
+                                      <td>
+                                          {{ product.StockQuantity }}
+                                      </td>
+                                      <td>
+                                          <img [src]="product.pictures[0].displayImageUrl" class="img img-fluid" alt="product.name">
+                                      </td>
+                                      <td>
+                                        <a class="btn btn-secondary">Edit</a>
+                                      </td>
+                                      <td>
+                                          <a class="btn btn-danger">Delete</a>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                          <a class="btn btn-danger" routerLink="/add-product">Add Product</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

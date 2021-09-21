@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="md-col-9" style=" margin: 0 auto; float: none; margin-bottom: 10px;">
+    <!-- Material form login -->
+    <div class="card">
+
+      <div *ngIf="error" class="alert alert-danger" style="text-align: center;" role="alert">
+        {{ error }}
+      </div>
+
+      <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Sign in</strong>
+      </h5>
+
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+
+    <!-- Form -->
+      <form class="text-center" style="color: #757575;" 
+      name="adminAuthForm" #adminAuthForm="ngForm" (ngSubmit)="onSubmit(adminAuthForm)">
+
+        <!-- Email -->
+        <div class="md-form">
+          <input type="email" id="email" name="email" ngModel class="form-control">
+          <label for="email">E-mail</label>
+        </div>
+
+        <!-- Password -->
+        <div class="md-form">
+          <input type="password" id="password" ngModel name="password" class="form-control">
+          <label for="password">Password</label>
+        </div>
+
+        <a href="">Forgot password?</a>
+        <!-- Sign in button -->
+        <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
+
+      </form>
+  </div>
+
+</div>
+<!-- Material form login -->
+  </div>  
+</div>

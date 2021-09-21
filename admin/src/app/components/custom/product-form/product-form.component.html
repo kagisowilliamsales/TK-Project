@@ -1,0 +1,152 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <h4 class="card-title">Add Product</h4>
+                      <p class="card-category">Complete Product information</p>
+                  </div>
+                  <div class="card-body">
+                      <form [formGroup]="productForm" (ngSubmit)="onSaveProduct()">
+                          <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <!--<input type="hidden" name="id" [(ngModel)]="this.dataservice.selectedProduct.id">-->
+                                  
+                                  <input matInput placeholder="Product signature name" type="text" name="name" formControlName="name">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <!--<input type="hidden" name="id" [(ngModel)]="this.dataservice.selectedProduct.id">-->
+                                  
+                                  <input matInput placeholder="Stock Quantity (Default 1)" type="nummber" name="stockQuantity" value='1' formControlName="stockQuantity" readonly>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Price ($)" type="number" min="1" step="any" name="price" formControlName="price">
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Height (inches)" type="number" min="1" step="any" name="price" formControlName="width">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-2">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Width (inches)" type="number" min="1" step="any" name="price" formControlName="height">
+                              </mat-form-field>
+                          </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-10">
+                                <mat-form-field class="example-full-width">
+                                  <textarea matInput placeholder="Description of the product"
+                                  name="description" formControlName="description"></textarea>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width">
+                                  <textarea matInput placeholder="Category"
+                                  name="productCategory" formControlName="catrgory"></textarea>
+                                </mat-form-field>
+                                <!--<mat-form-field class="example-full-width">
+                                  <select matInput placeholder="Category"
+                                    name="productCategory" formControlName="catrgory">
+                                    <option selected="selected" value="one">Table</option>
+                                    <option value="two">Chair</option>
+                                    <option value="three">Walldrop</option>
+                                  </select>
+                                </mat-form-field>!-->
+                              </div>
+                          </div>
+                          <div>
+                            <td>
+                              <img class="img-fluid" (click)="imageUpload.click()" class="img" [src]="productForm.value.displayImageUrl" />
+                              <input (change)="uploadDisplayImage($event)" #imageUpload  type="file" name="imageupload">
+                            </td>
+
+                            <!--<td>
+                              <img *ngIf="productCtrl.value.backImageUrl" class="img-fluid" (click)="thumnailUpload.click()" class="img" [src]="productCtrl.value.backImageUrl" />
+                              <input (change)="uploadBackImage($event,i)" #thumnailUpload  type="file" name="thumnailUpload">
+                            </td>-->
+
+                            <td>
+                              <img class="img-fluid" (click)="bigImageUpload.click()" class="img" [src]="productForm.value.otherViewImageUrl" />
+                              <input (change)="uploadOtherViewImage($event)" #bigImageUpload  type="file" name="bigImageUpload">
+                            </td>
+                          </div>
+                          <!--<div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <mat-select [(ngModel)]="this.dataservice.selectedProduct.category.typeofproduct" placeholder="Select Product Type" name="productType">
+                                    <mat-option *ngFor="let productType of this.dataservice.productTypes" [value]="productType">{{ productType }}</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <mat-select [(ngModel)]="this.dataservice.selectedProduct.category.gender" placeholder="Select Gender" name="productGender">
+                                    <mat-option *ngFor="let gender of this.dataservice.genderTypes" [value]="gender">{{ gender }}</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <mat-select [(ngModel)]="this.dataservice.selectedProduct.category.material" placeholder="Select Product Material" name="productMaterial">
+                                    <mat-option *ngFor="let material of this.dataservice.productMaterials" [value]="material">{{ material }}</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                          </div>-->
+                          <div class="row">
+                            <div class="col-md-10">
+                              <div formArrayName="RelatedComponents">
+                                <table class="table table-hover">
+                                  <thead class="text-warning">
+                                    <th>Component Name</th>
+                                    <th>Component Quantity</th>
+                                  </thead>
+                                  <tbody>
+                                      <tr *ngFor="let productCtrl of productForm.get('RelatedComponents').controls; let i = index"
+                                      [formGroupName]="i">
+                                        <td>
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Component Name" type="text" name="componentNameForm" formControlName="componentName">
+                                          </mat-form-field>
+                                        </td>
+                                        <td>
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Component Quantity" type="number" name="requiredComponentsQuantityForm" formControlName="requiredComponentsQuantity">
+                                          </mat-form-field>
+                                          
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Missing Components Quantity" type="number" name="missingComponentsquantityForm" formControlName="missingComponentsquantity">
+                                          </mat-form-field>
+                                          
+                                          <!--<mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Large Quantity" type="number" name="largeQuantity" formControlName="largeQuantity">
+                                          </mat-form-field>
+                                          
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Extra Large Quantity" type="number" name="xlQuantity" formControlName="extraLargelQuantity">
+                                          </mat-form-field>
+                                        </td>-->
+                                      </tr>
+                                  </tbody>
+                                  <button mat-raised-button type="button" (click)="addRelatedComponent()" class="btn btn-primary pull-left">Add Product Details</button>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Product</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
