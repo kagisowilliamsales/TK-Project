@@ -1,0 +1,35 @@
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+@Component({
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.sass']
+})
+export class MenuComponent implements OnInit {
+
+  @ViewChild('myHome') myDiv: ElementRef<HTMLElement>;
+  constructor(route:ActivatedRoute) {
+
+   }
+
+  ngOnInit() {
+    
+  }
+
+  ngAfterViewInit() {
+    let el: HTMLElement = this.myDiv.nativeElement;
+    el.click();
+  }
+
+  openMegaMenu(){
+    let pane = document.getElementsByClassName('cdk-overlay-pane');
+    [].forEach.call(pane, function (el) {
+        if(el.children.length > 0){
+          if(el.children[0].classList.contains('mega-menu')){
+            el.classList.add('mega-menu-pane');
+          }
+        }
+    });
+  }
+}
